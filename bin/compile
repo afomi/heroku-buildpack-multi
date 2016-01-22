@@ -51,6 +51,10 @@ for BUILDPACK in $(cat $1/.buildpacks); do
     chmod -f +x $dir/bin/{detect,compile,release} || true
 
     echo "detect..."
+    echo "PWD:"$(pwd)
+    echo "LS:"$(ls -al)
+    echo "LS:"$(ls -al bin)
+    echo "LS:"$(ls -al $dir/bin)
 
     framework=$(./bin/detect $1)
 
@@ -70,7 +74,10 @@ for BUILDPACK in $(cat $1/.buildpacks); do
       if [ -x $dir/bin/release ]; then
         $dir/bin/release $1 > $1/last_pack_release.out
       fi
+    else
+      echo "ERROR CODE WTF"$?
     fi
+
   fi
 done
 

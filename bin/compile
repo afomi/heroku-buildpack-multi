@@ -56,7 +56,9 @@ for BUILDPACK in $(cat $1/.buildpacks); do
     echo "LS:"$(ls -al bin)
     echo "LS:"$(ls -al $dir/bin)
 
-    framework=$(./bin/detect $1)
+    echo "INVOIKING detect from:$dir with arg:$1"
+    
+    framework=$($dir/bin/detect $1)
 
     if [ $? == 0 ]; then
       echo "=====> Detected Framework: $framework"

@@ -38,13 +38,15 @@ for BUILDPACK in $(cat $1/.buildpacks); do
       fi
     fi
     cd $dir
-    
+
     echo "Cloned and entered directory, building..."
 
     if [ "$branch" != "" ]; then
       git checkout $branch >/dev/null 2>&1
     fi
 
+    echo "DIR:"$dir
+    echo which npm
     echo "chmod..."
 
     # we'll get errors later if these are needed and don't exist
@@ -56,8 +58,8 @@ for BUILDPACK in $(cat $1/.buildpacks); do
     echo "LS:"$(ls -al bin)
     echo "LS:"$(ls -al $dir/bin)
 
-    echo "INVOIKING detect from:$dir with arg:$1"
-    
+    echo "INVOKING detect from:$dir with arg:$1"
+
     framework=$($dir/bin/detect $1)
 
     if [ $? == 0 ]; then
